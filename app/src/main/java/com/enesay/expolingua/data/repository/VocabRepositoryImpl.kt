@@ -30,4 +30,8 @@ class VocabRepositoryImpl @Inject constructor(
     override suspend fun getRandomVocab(): Vocab? {
         return dao.getRandomVocab()?.toVocab()
     }
+
+    override suspend fun deleteVocab(vocab: VocabEntity) {
+        dao.deleteVocab(vocab)
+    }
 } 
