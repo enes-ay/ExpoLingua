@@ -1,33 +1,35 @@
+package com.enesay.expolingua
+
+import android.content.Context
+import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.provideContent
 import androidx.glance.layout.Column
 import androidx.glance.layout.fillMaxSize
+import androidx.glance.layout.padding
 import androidx.glance.text.Text
-import androidx.glance.unit.ColorProvider
-import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.glance.appwidget.provideContent
-import androidx.glance.layout.Alignment
+import com.enesay.expolingua.domain.repository.VocabRepository
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class SentenceWidget : GlanceAppWidget() {
+class SentenceWidget @Inject constructor(
+    private val repository: VocabRepository
+) : GlanceAppWidget() {
+    
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        provideContent {
-            WidgetContent()
-        }
-    }
+        val randomVocab = runBlocking { repository.getRandomVocab() }
 
-    @Composable
-    private fun WidgetContent() {
-        Column(
-            modifier = GlanceModifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "The only thing that you have to know",
-            )
+        provideContent {
+            Column(
+                modifier = GlanceModifier.fillMaxSize().padding(16.dp)
+            ) {
+                Text(
+                    text = randomVocab?.sentence ?: "Add some vocabulary to see sentences here!"
+                )
+            }
         }
     }
 }
