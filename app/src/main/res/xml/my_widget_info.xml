@@ -1,0 +1,8 @@
+<appwidget-provider
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="80dp"
+    android:minHeight="70dp"
+    android:updatePeriodMillis="200"
+    android:resizeMode="horizontal|vertical"
+    android:initialLayout="@xml/loading_widget"
+    android:widgetCategory="home_screen" />
