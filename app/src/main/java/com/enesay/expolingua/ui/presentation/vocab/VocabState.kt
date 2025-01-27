@@ -1,4 +1,4 @@
-package com.enesay.expolingua.presentation.vocab
+package com.enesay.expolingua.ui.presentation.vocab
 
 import com.enesay.expolingua.data.local.VocabEntity
 

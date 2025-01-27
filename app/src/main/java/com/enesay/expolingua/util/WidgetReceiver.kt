@@ -1,8 +1,7 @@
-package com.enesay
+package com.enesay.expolingua.util
 
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
-import com.enesay.expolingua.SentenceWidget
 import com.enesay.expolingua.domain.repository.VocabRepository
 import javax.inject.Inject
 

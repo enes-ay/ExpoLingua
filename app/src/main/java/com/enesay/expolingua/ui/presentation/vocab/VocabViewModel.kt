@@ -1,4 +1,4 @@
-package com.enesay.expolingua.presentation.vocab
+package com.enesay.expolingua.ui.presentation.vocab
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
