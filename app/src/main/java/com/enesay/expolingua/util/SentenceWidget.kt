@@ -1,4 +1,4 @@
-package com.enesay.expolingua
+package com.enesay.expolingua.util
 
 import android.content.Context
 import androidx.compose.ui.unit.dp
@@ -11,7 +11,6 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import com.enesay.expolingua.domain.repository.VocabRepository
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 

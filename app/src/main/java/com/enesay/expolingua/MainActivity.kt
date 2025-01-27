@@ -3,13 +3,8 @@ package com.enesay.expolingua
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
@@ -21,8 +16,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.enesay.expolingua.data.local.VocabEntity
-import com.enesay.expolingua.presentation.vocab.VocabEvent
-import com.enesay.expolingua.presentation.vocab.VocabViewModel
+import com.enesay.expolingua.ui.presentation.vocab.VocabEvent
+import com.enesay.expolingua.ui.presentation.vocab.VocabViewModel
 import com.enesay.expolingua.ui.theme.ExpoLinguaTheme
 import com.enesay.expolingua.util.ColorUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,18 +25,35 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.navigation.compose.rememberNavController
+import com.enesay.expolingua.domain.use_case.IsOnboardingCompleteUseCase
+import com.enesay.expolingua.ui.AppNavGraph
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var isOnboardingCompleteUseCase: IsOnboardingCompleteUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             ExpoLinguaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    VocabScreen()
+
+                    val startDestination = remember {
+                        runBlocking {
+                            if (isOnboardingCompleteUseCase()) "main" else "onboarding"
+                        }
+                    }
+                    val navController = rememberNavController()
+                    AppNavGraph(navController = navController, startDestination = startDestination )
                 }
             }
         }
