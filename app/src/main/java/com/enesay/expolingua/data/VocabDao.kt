@@ -20,4 +20,7 @@ interface VocabDao {
     
     @Delete
     suspend fun deleteVocab(vocab: VocabEntity)
+    
+    @Query("SELECT * FROM vocabulary ORDER BY timestamp DESC")
+    suspend fun getAllVocabList(): List<VocabEntity>
 } 

@@ -94,7 +94,6 @@ dependencies {
     // Lottie for animations
     implementation ("com.airbnb.android:lottie:6.0.0")
 
-
-
-
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }

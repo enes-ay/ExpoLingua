@@ -23,7 +23,7 @@ class SentenceWidget @Inject constructor(
 
         provideContent {
             Column(
-                modifier = GlanceModifier.fillMaxSize().padding(16.dp)
+                modifier = GlanceModifier.fillMaxSize().padding(8.dp)
             ) {
                 Text(
                     text = randomVocab?.sentence ?: "Add some vocabulary to see sentences here!"
